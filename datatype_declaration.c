@@ -67,4 +67,3 @@ void datatype(char *a)
     }
     printf("%s",strg);
 }
-
