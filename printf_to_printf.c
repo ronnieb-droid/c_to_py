@@ -19,7 +19,7 @@ int main(){
        scanf("%[^\n]",code);
        //char *p=print;
        //printf("%p",p);
-        confirm(code,printc);//calling the first function to check 
+        confirm(code,elifc);//calling the first function to check 
        }
 
 void confirm(char code[],char check[]){
@@ -50,12 +50,32 @@ void convert(char code[],char code2[],char check[]){
         //will be used to change the c code/keyword into python
     int i=0;// r=0,s=0,n=0;
     int m;
+    int count=0,cont=0;//cont---->continue
     for(m=0;code[m]!=check[0];m++);//to use printf in any part of the line
+    //strcpy(code2,code);
     //printf("%d\n",m);
+    if(m!=0){
+        int m1=0;
+        cont=m;
+        char test[30];
+        for(cont;code[cont]!='\0';cont++){
+                if(code[cont]==check[m1]){
+                    test[m1]=check[m1];
+                    m1++;
+                }
+        }
+        if(strlen(test)==strlen(check)){
+                for(count;count<m;count++){
+                        code2[count]=code[count];
+                }
+        }
+    }
+
     if(keycheck==1){
         for(i; code[m]!='\0'; i++){
             if(code[m]==check[i]){
-                    code2[i]=printp[i];
+                    code2[count]=printp[i];
+                    count++;
             }
             m++;
            /* if(i>=strlen(checkp)){
@@ -82,23 +102,20 @@ void convert(char code[],char code2[],char check[]){
     else{
         for(i; code[m]!='\0'; i++){
             if(code[m]==check[i]){
-                    code2[i]=elifp[i];
+                    code2[count]=elifp[i];
+                    count++;
             }
             m++;
         }
     }
-
+   printf("%s\n",code2);
     int k=0,countcode2=0;
-    for(k; code[k]!=check[strlen(check)-1]; k++);
-    ++k;
-    //printf("%d %s %d %d\n",k,code,strlen(code2),strlen(elifp));
-    if(keycheck==1){
-        countcode2=strlen(printp);
-    }
-    else{
-        countcode2=strlen(elifp);
-
-    }
+    int f=strlen(elifc)-strlen(elifp);
+    //for(k; code[k]!=check[strlen(check)-1]; k++);
+    k=strlen(code2)+f;
+  
+    printf("%d %c\n",k,check[strlen(check)-2]);
+    countcode2=strlen(code2);
      for(k;code[k]!='\0';k++){
         code2[countcode2]=code[k];
         countcode2++;
@@ -109,12 +126,3 @@ void convert(char code[],char code2[],char check[]){
 }
 
 
-/*void declaration(char code[],char code2[],char check[]){
-        //used to replace int and all the integer type by null character
-        int i=0;// r=0,s=0,n=0;
-    for(i; code[i]!='\0'; i++){
-            if(code[i]==check[i]){
-                    code2[i]='\0';
-            }
-    }
-}*/
