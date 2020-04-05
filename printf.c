@@ -1,8 +1,7 @@
 #include<stdio.h>
-char printf(char cin[100])
+void print(char cin[100])
 {
-    char cout[100];
-    //scanf("%[^\n]",cin);
+    scanf("%[^\n]",cin);
     int j=0,k=0;
     for(int i=0;cin[i]!='\0';i++)
     {
@@ -42,6 +41,6 @@ char printf(char cin[100])
 
     }
     cout[j]='\0';
-    return cout;
+
 }
 
