@@ -1,6 +1,9 @@
 #include<stdio.h>
 #include<string.h>
 //Functions
+void datatype(char *a);
+void tab(char code2[]);
+void forloop(char* a);
 void confirm(char code[],char check[]);
 void convert(char code[],char code2[],char check[]);
 void declaration(char code[],char code2[],char check[]);
@@ -9,12 +12,12 @@ void declaration(char code[],char code2[],char check[]);
 char printc[20]="printf",elifc[10]="else if",ifc[4]="if",scanc[6]="scanf";
 char printp[20]="print",elifp[10]="elif",ifp[4]="if",inputp[6]="input";
 char intc[4]="int",doublec[6]="double",charc[4]="char";
-char code[100],code2[900];
+char code[100],code2[900],codefinal[900];
 int keycheck=0;//default for else if is 0 
 
 
 int main(){
-      int n;
+    int n;
     printf("Enter Number of lines of code: ");
     scanf("%d",&n);
     code[0]=getchar();
@@ -26,18 +29,23 @@ int main(){
         
         if((code[0]=='i')&&(code[1]=='n')){
             //Datatype change code
+            datatype(code);
         }
         else if((code[0]=='f')&&(code[1]=='l')){
             //run datatype code
+            datatype(code);
         }
         else if((code[0]=='f')&&(code[1]=='o')){
             //run for loop code
+            forloop(code);
         }
         else if(code[0]=='c'){
             //run datatype code
+            datatype(code);
         }
         else if(code[0]=='d'){
             //run datatype code
+            datatype(code);
         }
         else if((code[0]=='e')&&(code[1]=='l')&&(code[2]=='s')&&(code[3]=='e')&&(code[5]=='i')&&(code[6]=='f')){
             confirm(code,elifc);
@@ -61,7 +69,9 @@ int main(){
             lencode2++;
         }
     }
-    printf("%s",code2);
+    tab(code2);
+    printf("\nYour Python equivalent code is:\n");
+    printf("%s\n",codefinal);
 }
 
 
@@ -332,4 +342,317 @@ void convert(char code[],char code2[],char check[]){
         code2[countcode2]='\n';
         //printf("%s\n",code2);
     }
+}
+
+
+
+//code for data type--rounak strg
+
+void datatype(char *a)
+{
+    char inti[4] = "int";
+    char charc[5] = "char";
+    char doubled[7] = "double";
+    char floatf[6] = "float";
+    //char strg[25];
+    int i = 0,k = 0;
+    int ro = 0;
+    int len=strlen(a);
+    if(a[i]=='i'){
+        while(a[++i]==inti[++ro]);
+        if(ro==3){
+            int countcode2=strlen(code2);
+            ro++;
+            while(a[ro++]!=';'){
+                code2[countcode2]=a[ro-1];
+                countcode2++;
+            }
+            code2[countcode2]=';';
+            code2[countcode2+1]='\n';
+        }
+    }
+    if(a[i]=='c'){
+        while(a[++i]==charc[++ro]);
+        if(ro==4){
+            int countcode2=strlen(code2);
+            ro++;
+            while(a[ro++]!=';'){
+                code2[countcode2]=a[ro-1];
+                countcode2++;
+            }
+            code2[countcode2]=';';
+            code2[countcode2+1]='\n';
+        }
+    }
+    if(a[i]=='d'){
+        while(a[++i]==doubled[++ro]);
+        if(ro==6){
+            int countcode2=strlen(code2);
+            ro++;
+            while(a[ro++]!=';'){
+                code2[countcode2]=a[ro-1];
+                countcode2++;
+            }
+            code2[countcode2]=';';
+            code2[countcode2+1]='\n';
+        }
+    }
+    if(a[i]=='f'){
+        while(a[++i]==floatf[++ro]);
+        if(ro==5){
+            int countcode2=strlen(code2);
+            ro++;
+            while(a[ro++]!=';'){
+                code2[countcode2]=a[ro-1];
+                countcode2++;
+            }
+            code2[countcode2]=';';
+            code2[countcode2+1]='\n';
+        }
+    }
+    //printf("%s",code2);
+}
+
+
+
+//code for for-loop vaibhav
+void forloop(char* a)
+{
+  char x,y,z;
+  char b,c,d;
+  int s;
+  s=strlen(a);
+
+  if(s==18)
+  {
+     c=*(a+10);
+     if(c=='=')
+      {
+	b=*(a+4);
+	x=*(a+6);
+	y=*(a+11);
+	z=*(a+12);
+	//printf("CODE IN PYTHON -\n");
+	//printf("\tfor %c in range(%c,%c%c):\n",b,x,y,z+1);
+        char test[45]="for b in range(x,yz):\n";
+        int countcode2=strlen(code2);
+        for(int i=0;test[i]!='\0';i++){
+                if(test[i]=='b'){
+                        code2[countcode2]=b;
+                }
+                else if(test[i]=='x'){
+                        code2[countcode2]=x;
+                }
+                else if(test[i]=='y'){
+                        code2[countcode2]=y;
+                }
+                else if(test[i]=='z'){
+                        code2[countcode2]=z+1;
+                }
+                else{
+                        code2[countcode2]=test[i];
+                }
+                countcode2++;
+        }
+
+      }
+      else
+       {
+	  b=*(a+4);
+	  x=*(a+6);
+	  d=*(a+7);
+	  y=*(a+11);
+	  z=*(a+12);
+	  //printf("CODE IN PYTHON -\n");
+	  //printf("\tfor %c in range(%c%c,%c%c):\n",b,x,d,y,z);
+          char test[45]="for b in range(xd,yz):\n";
+        int countcode2=strlen(code2);
+        for(int i=0;test[i]!='\0';i++){
+                if(test[i]=='b'){
+                        code2[countcode2]=b;
+                }
+                else if(test[i]=='x'){
+                        code2[countcode2]=x;
+                }
+                else if(test[i]=='d'){
+                        code2[countcode2]=d;
+                }
+                else if(test[i]=='y'){
+                        code2[countcode2]=y;
+                }
+                else if(test[i]=='z'){
+                        code2[countcode2]=z;
+                }
+                else{
+                        code2[countcode2]=test[i];
+                }
+                countcode2++;
+        }
+
+       }
+  }
+
+  else if(s==17)
+  {
+      c=*(a+10);
+       if(c!='=')
+      {
+	 b=*(a+4);
+	 x=*(a+6);
+	 y=*(a+10);
+	 z=*(a+11);
+	// printf("CODE IN PYTHON -\n");
+	// printf("\tfor %c in range(%c,%c%c):\n",b,x,y,z);
+        char test[45]="for b in range(x,yz):\n";
+        int countcode2=strlen(code2);
+        for(int i=0;test[i]!='\0';i++){
+                if(test[i]=='b'){
+                        code2[countcode2]=b;
+                }
+                else if(test[i]=='x'){
+                        code2[countcode2]=x;
+                }
+                else if(test[i]=='y'){
+                        code2[countcode2]=y;
+                }
+                else if(test[i]=='z'){
+                        code2[countcode2]=z;
+                }
+                else{
+                        code2[countcode2]=test[i];
+                }
+                countcode2++;
+        }
+
+       }
+      else
+       {
+	  b=*(a+4);
+	  x=*(a+6);
+	  y=*(a+11);
+
+	 // printf("CODE IN PYTHON -\n");
+	//  printf("\tfor %c in range(%c,%c):\n",b,x,y+1);
+        char test[45]="for b in range(x,y):\n";
+        int countcode2=strlen(code2);
+        for(int i=0;test[i]!='\0';i++){
+                if(test[i]=='b'){
+                        code2[countcode2]=b;
+                }
+                else if(test[i]=='x'){
+                        code2[countcode2]=x;
+                }
+                else if(test[i]=='y'){
+                        code2[countcode2]=y+1;
+                }
+                else{
+                        code2[countcode2]=test[i];
+                }
+                countcode2++;
+        }
+
+
+	}
+  }
+   else if(s==19)
+	{
+	   b=*(a+4);
+	   c=*(a+7);
+	   x=*(a+6);
+	   y=*(a+12);
+	   z=*(a+13);
+	 //  printf("CODE IN PYTHON -\n");
+	 //  printf("\tfor %c in range(%c%c,%c%c):\n",b,x,c,y,z+1);
+        char test[45]="for b in range(xc,yz):\n";
+        int countcode2=strlen(code2);
+        for(int i=0;test[i]!='\0';i++){
+                if(test[i]=='b'){
+                        code2[countcode2]=b;
+                }
+                else if(test[i]=='x'){
+                        code2[countcode2]=x;
+                }
+                else if(test[i]=='c'){
+                        code2[countcode2]=c;
+                }
+                else if(test[i]=='y'){
+                        code2[countcode2]=y;
+                }
+                else if(test[i]=='z'){
+                        code2[countcode2]=z+1;
+                }
+                else{
+                        code2[countcode2]=test[i];
+                }
+                countcode2++;
+        }
+
+	 }
+    else if(s==16)
+	 {
+	   b=*(a+4);
+	   x=*(a+6);
+	   y=*(a+10);
+	  // printf("CODE IN PYTHON -\n");
+	// printf("\tfor %c in range(%c,%c):\n",b,x,y);
+        char test[45]="for b in range(x,y):\n";
+        int countcode2=strlen(code2);
+        for(int i=0;test[i]!='\0';i++){
+                if(test[i]=='b'){
+                        code2[countcode2]=b;
+                }
+                else if(test[i]=='x'){
+                        code2[countcode2]=x;
+                }
+                else if(test[i]=='y'){
+                        code2[countcode2]=y;
+                }
+                else{
+                        code2[countcode2]=test[i];
+                }
+                countcode2++;
+        }
+
+	  }
+
+
+
+}
+
+
+
+//code for tabspace--sudhanva
+
+void tab(char code2[])
+{
+  int i=0,j=0,k=0,l=0;
+  for(i;code2[i]!='\0';i++)
+    {
+      if(code2[i-1]=='\n'&&code2[i-2]!='{')
+        {
+          for(l=0;l<k;l++)
+            {
+              codefinal[j]='\t';
+              j++;
+            }
+
+        }
+      if(code2[i]=='{')
+        {
+          codefinal[j]='\t';
+          k++;
+          j++;
+          i++;
+        }
+      else if(code2[i]=='}')
+        {
+          k--;
+        }
+      else
+        {
+          codefinal[j]=code2[i];
+          j++;
+        }
+    }
+  codefinal[j]='\0';
 }
