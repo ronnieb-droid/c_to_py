@@ -61,6 +61,7 @@ int main(){
             lencode2++;
         }
     }
+    printf("%s",code2);
 }
 
 
@@ -121,10 +122,11 @@ void convert(char code[],char code2[],char check[]){
     }
 
     if(keycheck==1){
+        int checky=strlen(code2);
         for(i; code[m]!='\0'; i++){
             if(code[m]==check[i]){
-                    code2[count]=printp[i];
-                    count++;
+                    code2[checky]=printp[i];
+                    checky++;
             }
             m++;
         }
@@ -295,7 +297,7 @@ void convert(char code[],char code2[],char check[]){
                 }     
                 //printf("%s",code2); 
     }
-    if(keycheck==1){
+    else if(keycheck==1){
         //printf("%s\n",code2);
         int k,countcode2=0;
         //int f=strlen(elifc)-strlen(elifp);
@@ -303,11 +305,15 @@ void convert(char code[],char code2[],char check[]){
         for(k=0;code[k]!='(';k++);
         //printf("%d %c\n",k,check[strlen(check)-2]);
         countcode2=strlen(code2);
+        //printf("%c\n",code2[0]);
+        //printf("%d\n",strlen(code2));
         for(k;code[k]!='\0';k++){
                 code2[countcode2]=code[k];
                 countcode2++;
         }
         code2[countcode2]='\n';
+        //printf("%d\n",strlen(code2));
+        //printf("%c\n",code2[0]);
         //printf("%s\n",code2);//strlen(code2)=22
     }
     else{
@@ -324,5 +330,6 @@ void convert(char code[],char code2[],char check[]){
         }
         //code2[k-1]='\0';
         code2[countcode2]='\n';
+        //printf("%s\n",code2);
     }
 }
