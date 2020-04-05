@@ -1,46 +1,45 @@
 #include<stdio.h>
-void print(char cin[100])
+void print(char code[100])
 {
-    scanf("%[^\n]",cin);
     int j=0,k=0;
-    for(int i=0;cin[i]!='\0';i++)
+    for(int i=0;code[i]!='\0';i++)
     {
-        if(cin[i]=='p'&&cin[i+1]=='r'&&cin[i+2]=='i'&&cin[i+3]=='n'&&cin[i+4]=='t'&&cin[i+5]=='f')
+        if(code[i]=='p'&&code[i+1]=='r'&&code[i+2]=='i'&&code[i+3]=='n'&&code[i+4]=='t'&&code[i+5]=='f')
             {
-                cout[j]='p';
-                cout[j+1]='r';
-                cout[j+2]='i';
-                cout[j+3]='n';
-                cout[j+4]='t';
+                code2[j]='p';
+                code2[j+1]='r';
+                code2[j+2]='i';
+                code2[j+3]='n';
+                code2[j+4]='t';
                 j+=5;
                 i+=5;
             }
-        else if(cin[i]=='(')
+        else if(code[i]=='(')
         {
-            cout[j]=cin[i];
+            code2[j]=code[i];
             j++;
-            for(int l=i+1;cin[l]!=')';l++)
-                if(cin[l]==','&&cin[l-1]=='"')
+            for(int l=i+1;code[l]!=')';l++)
+                if(code[l]==','&&code[l-1]=='"')
                     k++;
         }
         else if(k==1)
         {
-            for(i;cin[i]!=',';i++);
+            for(i;code[i]!=',';i++);
             k=0;
         }
         else if(k==0)
            {
-                cout[j]=cin[i];
+                code2[j]=code[i];
                 j++;
            }
         else
            {
-                cout[j]=cin[i];
+                code2[j]=code[i];
                 j++;
            }
 
     }
-    cout[j]='\0';
+    code2[j]='\0';
 
 }
 
