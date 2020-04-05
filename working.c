@@ -19,6 +19,7 @@ int keycheck=0;//default for else if is 0
 
 int main(){
     int n;
+    int p=0;
     printf("Enter Number of lines of code: ");
     scanf("%d",&n);
     code[0]=getchar();
@@ -27,8 +28,14 @@ int main(){
             code[k+1]=getchar();
         }
         scanf("%[^\n]",code);//from for(int k ...) to this scanf used for input very necessary otherwise not working and i dont know why
-        
-        if((code[0]=='i')&&(code[1]=='n')){
+        if(code[0]=='#'){}
+        else if((code[0]=='i')&&(code[1]=='n')&&(code[2]=='t')&&(code[4]=='m')&&(code[5]=='a')&&(code[6]=='i')&&(code[7]=='n')&&(code[8]=='(')&&(code[9]==')')){
+            p=1;
+        }
+        else if(p>0){
+            p=0;
+        }
+        else if((code[0]=='i')&&(code[1]=='n')){
             //Datatype change code
             datatype(code);
         }
@@ -81,6 +88,8 @@ int main(){
     }
    
     //printf("%s\n",code2);
+    if(code2[strlen(code2)-1]=='}')
+        code2[strlen(code2)-1]='\0';
     tab(code2);
     printf("\nYour Python equivalent code is:\n\n");
     printf("%s\n",codefinal);
