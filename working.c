@@ -4,6 +4,7 @@
 void datatype(char *a);
 void tab(char code2[]);
 void forloop(char* a);
+void print(char code[]);
 void confirm(char code[],char check[]);
 void convert(char code[],char code2[],char check[]);
 void declaration(char code[],char code2[],char check[]);
@@ -55,7 +56,7 @@ int main(){
             //run while loop code
         }
         else if(code[0]=='p'){
-            confirm(code,printc);
+            print(code);
         }
         else if(code[0]=='s'){
             confirm(code,scanc);
@@ -385,53 +386,112 @@ void datatype(char *a)
     if(a[i]=='i'){
         while(a[++i]==inti[++ro]);
         if(ro==3){
-            int countcode2=strlen(code2);
+            k=strlen(code2);
             ro++;
-            while(a[ro++]!=';'){
-                code2[countcode2]=a[ro-1];
-                countcode2++;
-            }
-            code2[countcode2]=';';
-            code2[countcode2+1]='\n';
+            while(a[ro++]!='\0'){
+                if(a[ro-1]==';'){
+                    if(a[ro-2]=='0' || a[ro-2]=='1' || a[ro-2]=='2' || a[ro-2]=='3' || a[ro-2]=='4' || a[ro-2]=='5' ||
+                       a[ro-2]=='6' || a[ro-2]=='7' || a[ro-2]=='8' || a[ro-2]=='9'){
+                        //printf("%d", ro);
+                        break;
+                    }
+                    else{
+                        code2[k]='=';
+                        k++;
+                        code2[k]='0';
+                        k++;
+                    }
+                }
+                else if(a[ro-1]!=';'){
+                    code2[k]=a[ro-1];
+                    k++;
+                }
+             }
+            code2[k]=';';
+            code2[k+1]='\n';
         }
     }
     if(a[i]=='c'){
         while(a[++i]==charc[++ro]);
         if(ro==4){
-            int countcode2=strlen(code2);
+            k=strlen(code2);
             ro++;
-            while(a[ro++]!=';'){
-                code2[countcode2]=a[ro-1];
-                countcode2++;
+            while(a[ro++]!='\0'){
+                if(a[ro-1]==';'){
+                    if(a[ro-2]=='\''){
+                        //printf("%d", ro);
+                        break;
+                    }
+                    else{
+                        code2[k++]='=';
+                        code2[k++]='\'';
+                        code2[k++]='a';
+                        code2[k++]='\'';
+                    }
+                }
+                else if(a[ro-1]!=';'){
+                    code2[k]=a[ro-1];
+                    k++;
+                }
             }
-            code2[countcode2]=';';
-            code2[countcode2+1]='\n';
+            code2[k]=';';
+            code2[k+1]='\n';
         }
     }
     if(a[i]=='d'){
         while(a[++i]==doubled[++ro]);
         if(ro==6){
-            int countcode2=strlen(code2);
+            k=strlen(code2);
             ro++;
-            while(a[ro++]!=';'){
-                code2[countcode2]=a[ro-1];
-                countcode2++;
+             while(a[ro++]!='\0'){
+                if(a[ro-1]==';'){
+                    if(a[ro-2]=='0' || a[ro-2]=='1' || a[ro-2]=='2' || a[ro-2]=='3' || a[ro-2]=='4' || a[ro-2]=='5' ||
+                       a[ro-2]=='6' || a[ro-2]=='7' || a[ro-2]=='8' || a[ro-2]=='9'){
+                        //printf("%d", ro);
+                        break;
+                    }
+                    else{
+                        code2[k++]='=';
+                        code2[k++]='0';
+                        code2[k++]='.';
+                        code2[k++]='0';
+                    }
+                }
+                else if(a[ro-1]!=';'){
+                    code2[k]=a[ro-1];
+                    k++;
+                }
             }
-            code2[countcode2]=';';
-            code2[countcode2+1]='\n';
+            code2[k]=';';
+            code2[k+1]='\n';
         }
     }
     if(a[i]=='f'){
         while(a[++i]==floatf[++ro]);
         if(ro==5){
-            int countcode2=strlen(code2);
+            k=strlen(code2);
             ro++;
-            while(a[ro++]!=';'){
-                code2[countcode2]=a[ro-1];
-                countcode2++;
+            while(a[ro++]!='\0'){
+                if(a[ro-1]==';'){
+                    if(a[ro-2]=='0' || a[ro-2]=='1' || a[ro-2]=='2' || a[ro-2]=='3' || a[ro-2]=='4' || a[ro-2]=='5' ||
+                       a[ro-2]=='6' || a[ro-2]=='7' || a[ro-2]=='8' || a[ro-2]=='9'){
+                        //printf("%d", ro);
+                        break;
+                    }
+                    else{
+                        code2[k++]='=';
+                        code2[k++]='0';
+                        code2[k++]='.';
+                        code2[k++]='0';
+                    }
+                }
+                else if(a[ro-1]!=';'){
+                    code2[k]=a[ro-1];
+                    k++;
+                }
             }
-            code2[countcode2]=';';
-            code2[countcode2+1]='\n';
+            code2[k]=';';
+            code2[k+1]='\n';
         }
     }
     //printf("%s",code2);
@@ -679,4 +739,53 @@ void tab(char code2[])
         }
     }
   codefinal[j]='\0';
+}
+
+
+//for print part -- Sudhanva
+
+void print(char code[])
+{
+    int j=strlen(code2);
+    int k=0;
+    for(int i=0;code[i]!='\0';i++)
+    {
+        if(code[i]=='p'&&code[i+1]=='r'&&code[i+2]=='i'&&code[i+3]=='n'&&code[i+4]=='t'&&code[i+5]=='f')
+            {
+                code2[j]='p';
+                code2[j+1]='r';
+                code2[j+2]='i';
+                code2[j+3]='n';
+                code2[j+4]='t';
+                j+=5;
+                i+=5;
+            }
+        else if(code[i]=='(')
+        {
+            code2[j]=code[i];
+            j++;
+            for(int l=i+1;code[l]!=')';l++)
+                if(code[l]==','&&code[l-1]=='"')
+                    k++;
+        }
+        else if(k==1)
+        {
+            for(i;code[i]!=',';i++);
+            k=0;
+        }
+        else if(k==0)
+           {
+                code2[j]=code[i];
+                j++;
+           }
+        else
+           {
+                code2[j]=code[i];
+                j++;
+           }
+
+    }
+    code2[j]=';';
+    code2[strlen(code2)-1]='\n';
+
 }
