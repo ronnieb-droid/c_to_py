@@ -1,0 +1,26 @@
+#include<stdio.h>
+int main()
+{
+int i=0;
+int k;
+float f=10;
+for(i=0;i<=10;i++)
+{
+printf("You know me");
+printf("Input Number %d.%d",i,i);
+scanf("%d",&k);
+}
+if(k>100)
+{
+printf("It is greater than 100");
+}
+else if((k<100) && (k>50))
+{
+printf("Between 50 and 100");
+printf("Yes Betweeen that");
+}
+else
+{
+printf("I have No Idea");
+}
+}
