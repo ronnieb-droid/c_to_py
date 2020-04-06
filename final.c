@@ -16,7 +16,7 @@ char printp[20]="print",elifp[10]="elif",ifp[4]="if",inputp[6]="input";
 char intc[4]="int",doublec[6]="double",charc[4]="char";
 char code[100],code2[900],code3[900],codefinal[900];
 int keycheck=0;//default for else if is 0 
-
+int ancheck=0;
 
 int main(){
     int n=1000;
@@ -41,47 +41,57 @@ int main(){
     printf("\n\n");
     /*printf("Enter Number of lines of code: ");
     scanf("%d",&n);*/
-    printf("Enter your C Code:\nNote: Enter \"end\" for terminating the program on a new line.\n\n");
+    printf("Enter your C Code:\nNote: Enter \"end\" for terminating the program on a new line and press Enter/Return to Continue.\n");
     code[0]=getchar();
     for(int i=0;i<n;i++){
         for(int k=0;code[k]!='\n';k++){
             code[k+1]=getchar();
         }
         scanf("%[^\n]",code);//from for(int k ...) to this scanf used for input very necessary otherwise not working and i dont know why
-        if((code[0]=='e')&&(code[1]=='n')&&(code[2]=='d')){break;}
-        else if(code[0]=='#'){}
+        //printf("%s   %d\n",code,ancheck);
+        ancheck=0;
+        if((code[0]=='e')&&(code[1]=='n')&&(code[2]=='d')){ancheck+=1;break;}
+        else if(code[0]=='#'){ancheck+=1;}
         else if((code[0]=='i')&&(code[1]=='n')&&(code[2]=='t')&&(code[4]=='m')&&(code[5]=='a')&&(code[6]=='i')&&(code[7]=='n')&&(code[8]=='(')&&(code[9]==')')){
             p=1;
+            ancheck+=1;
         }
         else if((code[0]=='v')&&(code[1]=='o')&&(code[2]=='i')&&(code[3]=='d')&&(code[5]=='m')&&(code[6]=='a')&&(code[7]=='i')&&(code[8]=='n')&&(code[9]=='(')){
             p=1;
+            ancheck+=1;
         }
         else if(p>0){
             p=0;
+            ancheck+=1;
         }
         else if((code[0]=='i')&&(code[1]=='n')){
             //Datatype change code
             datatype(code);
+            ancheck+=1;
         }
         else if((code[0]=='f')&&(code[1]=='l')){
             //run datatype code
             datatype(code);
+            ancheck+=1;
         }
         else if((code[0]=='f')&&(code[1]=='o')){
             //run for loop code
             forloop(code);
+            ancheck+=1;
         }
         else if(code[0]=='c'){
             //run datatype code
             datatype(code);
+            ancheck+=1;
         }
         else if(code[0]=='d'){
             //run datatype code
             datatype(code);
+            ancheck+=1;
         }
         else if((code[0]=='e')&&(code[1]=='l')&&(code[2]=='s')&&(code[3]=='e')&&(code[5]=='i')&&(code[6]=='f')){
             confirm(code,elifc);
-            
+            ancheck+=1;   
         }
         else if(code[0]=='w'){
             int lencode2=strlen(code2);
@@ -92,14 +102,18 @@ int main(){
             code2[lencode2]=':';
             code2[++lencode2]='\n';
             lencode2++;
+            ancheck+=1;
         }
         else if(code[0]=='p'){
             print(code);
+            ancheck+=1;
         }
         else if(code[0]=='s'){
             confirm(code,scanc);
+            ancheck+=1;
         }
         else{
+            ancheck+=1;
             int lencode2=strlen(code2);
             for(int k=0;k<strlen(code);k++){
                 code2[lencode2]=code[k];
@@ -111,10 +125,21 @@ int main(){
         if((code[0]=='i')&&(code[1]=='f')){
             code2[strlen(code2)-1]=':';
             code2[strlen(code2)]='\n';
+            ancheck+=1;
         }
         else if((code[0]=='e')&&(code[1]=='l')&&(code[2]=='s')&&(code[3]=='e')){
             code2[strlen(code2)-1]=':';
             code2[strlen(code2)]='\n';
+            ancheck+=1;
+        }
+        if(ancheck==0){
+            int lencode2=strlen(code2);
+            for(int k=0;k<strlen(code);k++){
+                code2[lencode2]=code[k];
+                lencode2++;
+            }
+            code2[lencode2]='\n';
+            lencode2++;
         }
     }
    
@@ -132,7 +157,7 @@ int main(){
         printf("*");
     }
     printf("\n");
-    printf("\n\nSubmission By:\nAmritesh\nRounak B\nSudhanva Rajesh\nVemula Vaibhav\n");
+    //printf("\n\nSubmission By:\nAmritesh\nRounak B\nSudhanva Rajesh\nVemula Vaibhav\n");
 }
 
 
