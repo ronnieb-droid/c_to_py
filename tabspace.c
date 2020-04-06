@@ -23,6 +23,7 @@ void tab(char code2[200])
       else if(code2[i]=='}')
         {
           k--;
+          i++;
         }
       else
         {
