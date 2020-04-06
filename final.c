@@ -157,7 +157,7 @@ int main(){
         printf("*");
     }
     printf("\n");
-    //printf("\n\nSubmission By:\nAmritesh\nRounak B\nSudhanva Rajesh\nVemula Vaibhav\n");
+    printf("\n\nSubmission By:\nAmritesh\nRounak B\nSudhanva Rajesh\nVemula Vaibhav\n");
 }
 
 
