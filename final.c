@@ -131,7 +131,7 @@ int main(){
     for(int ask=0;ask<79;ask++){
         printf("*");
     }
-    //printf("\n\nSubmission By:\nAmritesh\nRounak B\nSudhanva Rajesh\nVemula Vaibhav\n");
+    printf("\n\nSubmission By:\nAmritesh\nRounak B\nSudhanva Rajesh\nVemula Vaibhav\n");
 }
 
 
