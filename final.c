@@ -90,7 +90,7 @@ int main(){
                 lencode2++;
             }
             code2[lencode2]=':';
-            code2[lencode2]='\n';
+            code2[++lencode2]='\n';
             lencode2++;
         }
         else if(code[0]=='p'){
@@ -131,6 +131,7 @@ int main(){
     for(int ask=0;ask<79;ask++){
         printf("*");
     }
+    printf("\n");
     printf("\n\nSubmission By:\nAmritesh\nRounak B\nSudhanva Rajesh\nVemula Vaibhav\n");
 }
 
