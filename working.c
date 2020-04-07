@@ -5,6 +5,7 @@ void datatype(char *a);
 void tab(char code2[]);
 void forloop(char* a);
 void print(char code[]);
+void condoper(char code3[]);
 void confirm(char code[],char check[]);
 void convert(char code[],char code2[],char check[]);
 void declaration(char code[],char code2[],char check[]);
@@ -13,62 +14,106 @@ void declaration(char code[],char code2[],char check[]);
 char printc[20]="printf",elifc[10]="else if",ifc[4]="if",scanc[6]="scanf";
 char printp[20]="print",elifp[10]="elif",ifp[4]="if",inputp[6]="input";
 char intc[4]="int",doublec[6]="double",charc[4]="char";
-char code[100],code2[900],codefinal[900];
+char code[100],code2[900],code3[900],codefinal[900];
 int keycheck=0;//default for else if is 0 
-
+int ancheck=0;
 
 int main(){
-    int n;
+    int n=1000;
     int p=0;
-    printf("Enter Number of lines of code: ");
-    scanf("%d",&n);
+    int width = 80;
+    char str[] = "WELCOME";
+    int length = sizeof(str) - 1;  // Discount the terminal '\0'
+    int pad = (length >= width) ? 0 : (width - length) / 2;
+    printf("\n\n ");
+    for(int ask=0;ask<78;ask++){
+        printf("-");
+    }
+    printf("\n|%*.*s%s", pad, pad, " ", str);
+    for(int ask=0;ask<36;ask++){
+        printf(" ");
+    }
+    printf("|\n");
+    printf(" ");
+    for(int ask=0;ask<78;ask++){
+        printf("-");
+    }
+    printf("\n\n");
+    /*printf("Enter Number of lines of code: ");
+    scanf("%d",&n);*/
+    printf("Enter your C Code:\nNote: Enter \"end\" for terminating the program on a new line and press Enter/Return to Continue.\n");
     code[0]=getchar();
     for(int i=0;i<n;i++){
         for(int k=0;code[k]!='\n';k++){
             code[k+1]=getchar();
         }
         scanf("%[^\n]",code);//from for(int k ...) to this scanf used for input very necessary otherwise not working and i dont know why
-        if(code[0]=='#'){}
+        //printf("%s   %d\n",code,ancheck);
+        ancheck=0;
+        if((code[0]=='e')&&(code[1]=='n')&&(code[2]=='d')){ancheck+=1;break;}
+        else if(code[0]=='#'){ancheck+=1;}
         else if((code[0]=='i')&&(code[1]=='n')&&(code[2]=='t')&&(code[4]=='m')&&(code[5]=='a')&&(code[6]=='i')&&(code[7]=='n')&&(code[8]=='(')&&(code[9]==')')){
             p=1;
+            ancheck+=1;
+        }
+        else if((code[0]=='v')&&(code[1]=='o')&&(code[2]=='i')&&(code[3]=='d')&&(code[5]=='m')&&(code[6]=='a')&&(code[7]=='i')&&(code[8]=='n')&&(code[9]=='(')){
+            p=1;
+            ancheck+=1;
         }
         else if(p>0){
             p=0;
+            ancheck+=1;
         }
         else if((code[0]=='i')&&(code[1]=='n')){
             //Datatype change code
             datatype(code);
+            ancheck+=1;
         }
         else if((code[0]=='f')&&(code[1]=='l')){
             //run datatype code
             datatype(code);
+            ancheck+=1;
         }
         else if((code[0]=='f')&&(code[1]=='o')){
             //run for loop code
             forloop(code);
+            ancheck+=1;
         }
         else if(code[0]=='c'){
             //run datatype code
             datatype(code);
+            ancheck+=1;
         }
         else if(code[0]=='d'){
             //run datatype code
             datatype(code);
+            ancheck+=1;
         }
         else if((code[0]=='e')&&(code[1]=='l')&&(code[2]=='s')&&(code[3]=='e')&&(code[5]=='i')&&(code[6]=='f')){
             confirm(code,elifc);
-            
+            ancheck+=1;   
         }
         else if(code[0]=='w'){
-            //run while loop code
+            int lencode2=strlen(code2);
+            for(int k=0;k<strlen(code);k++){
+                code2[lencode2]=code[k];
+                lencode2++;
+            }
+            code2[lencode2]=':';
+            code2[++lencode2]='\n';
+            lencode2++;
+            ancheck+=1;
         }
         else if(code[0]=='p'){
             print(code);
+            ancheck+=1;
         }
         else if(code[0]=='s'){
             confirm(code,scanc);
+            ancheck+=1;
         }
         else{
+            ancheck+=1;
             int lencode2=strlen(code2);
             for(int k=0;k<strlen(code);k++){
                 code2[lencode2]=code[k];
@@ -80,10 +125,21 @@ int main(){
         if((code[0]=='i')&&(code[1]=='f')){
             code2[strlen(code2)-1]=':';
             code2[strlen(code2)]='\n';
+            ancheck+=1;
         }
         else if((code[0]=='e')&&(code[1]=='l')&&(code[2]=='s')&&(code[3]=='e')){
             code2[strlen(code2)-1]=':';
             code2[strlen(code2)]='\n';
+            ancheck+=1;
+        }
+        if(ancheck==0){
+            int lencode2=strlen(code2);
+            for(int k=0;k<strlen(code);k++){
+                code2[lencode2]=code[k];
+                lencode2++;
+            }
+            code2[lencode2]='\n';
+            lencode2++;
         }
     }
    
@@ -91,41 +147,36 @@ int main(){
     if(code2[strlen(code2)-1]=='}')
         code2[strlen(code2)-1]='\0';
     tab(code2);
-    printf("\nYour Python equivalent code is:\n\n");
-    printf("%s\n",codefinal);
+    //printf("%s",code3);
+    condoper(code3);
+    printf("\n -------------------------------");
+    printf("\n|Your Python equivalent code is:|");
+    printf("\n -------------------------------\n\n");
+    printf("%s\n\n",codefinal);//after condoper it should be codefinal
+    for(int ask=0;ask<79;ask++){
+        printf("*");
+    }
+    printf("\n");
+    printf("\n\nSubmission By:\nAmritesh\nRounak B\nSudhanva Rajesh\nVemula Vaibhav\n");
 }
-
-
-
-
-
-
-
 
 
 //code to check scanf,printf,elif
 
 void confirm(char code[],char check[]){
-        //checks if a particular keyword is used or not
         int i =0;
         keycheck=0;
         char code3[20];
         int m;
-        for(m=0;code[m]!=check[0];m++);//to use keyword in any part of the line
+        for(m=0;code[m]!=check[0];m++);
         for(i; code[m]!='\0'; i++){
                  if(code[m]==check[i]){
                          code3[i]=check[i];
                 }
                 m++;
         }
-        //printf("%d\n%s\n",strlen(code3),code3);
-        
         if((strlen(code3)==8)){
-                //8 because for both it is only giving value as 8
-                if(check[0]=='p'){
-                        keycheck=1;
-                }
-                else if(check[0]=='s'){
+                if(check[0]=='s'){
                         keycheck=2;
                 }
                 convert(code,code2,check);
@@ -154,18 +205,7 @@ void convert(char code[],char code2[],char check[]){
                 }
         }
     }
-
-    if(keycheck==1){
-        int checky=strlen(code2);
-        for(i; code[m]!='\0'; i++){
-            if(code[m]==check[i]){
-                    code2[checky]=printp[i];
-                    checky++;
-            }
-            m++;
-        }
-    }
-    else if(keycheck==0){
+    if(keycheck==0){
         int checky=strlen(code2);
         for(i; code[m]!='\0'; i++){
             if(code[m]==check[i]){
@@ -328,31 +368,9 @@ void convert(char code[],char code2[],char check[]){
 
                                 }
                         }
-                }     
-                //printf("%s",code2); 
-    }
-    else if(keycheck==1){
-        //printf("%s\n",code2);
-        int k,countcode2=0;
-        //int f=strlen(elifc)-strlen(elifp);
-        //k=strlen(code2)+f;
-        for(k=0;code[k]!='(';k++);
-        //printf("%d %c\n",k,check[strlen(check)-2]);
-        countcode2=strlen(code2);
-        //printf("%c\n",code2[0]);
-        //printf("%d\n",strlen(code2));
-        for(k;code[k]!='\0';k++){
-                code2[countcode2]=code[k];
-                countcode2++;
-        }
-        code2[countcode2]='\n';
-        //printf("%d\n",strlen(code2));
-        //printf("%c\n",code2[0]);
-        //printf("This is a legal info that this is a print statement\n");
-        //printf("%s\n",code2);//strlen(code2)=22
+                }  
     }
     else{
-        //printf("%s\n",code2);
         int k=0,countcode2=0;
         char test[30];
         int c1=0;
@@ -364,15 +382,11 @@ void convert(char code[],char code2[],char check[]){
             if(strlen(test)==strlen(check))
                 break;
         }
-        /*int f=strlen(elifc)-strlen(elifp);
-        k=strlen(code2)+f;*/
-        //printf("%d %c\n",k,check[strlen(check)-2]);
         countcode2=strlen(code2);
         for(k;code[k]!='\0';k++){
                 code2[countcode2]=code[k];
                 countcode2++;
         }
-        //code2[k-1]='\0';
         code2[countcode2]='\n';
         //printf("%s\n",code2);
     }
@@ -388,7 +402,6 @@ void datatype(char *a)
     char charc[5] = "char";
     char doubled[7] = "double";
     char floatf[6] = "float";
-    //char strg[25];
     int i = 0,k = 0;
     int ro = 0;
     int len=strlen(a);
@@ -401,7 +414,6 @@ void datatype(char *a)
                 if(a[ro-1]==';'){
                     if(a[ro-2]=='0' || a[ro-2]=='1' || a[ro-2]=='2' || a[ro-2]=='3' || a[ro-2]=='4' || a[ro-2]=='5' ||
                        a[ro-2]=='6' || a[ro-2]=='7' || a[ro-2]=='8' || a[ro-2]=='9'){
-                        //printf("%d", ro);
                         break;
                     }
                     else{
@@ -428,7 +440,6 @@ void datatype(char *a)
             while(a[ro++]!='\0'){
                 if(a[ro-1]==';'){
                     if(a[ro-2]=='\''){
-                        //printf("%d", ro);
                         break;
                     }
                     else{
@@ -456,7 +467,6 @@ void datatype(char *a)
                 if(a[ro-1]==';'){
                     if(a[ro-2]=='0' || a[ro-2]=='1' || a[ro-2]=='2' || a[ro-2]=='3' || a[ro-2]=='4' || a[ro-2]=='5' ||
                        a[ro-2]=='6' || a[ro-2]=='7' || a[ro-2]=='8' || a[ro-2]=='9'){
-                        //printf("%d", ro);
                         break;
                     }
                     else{
@@ -484,7 +494,6 @@ void datatype(char *a)
                 if(a[ro-1]==';'){
                     if(a[ro-2]=='0' || a[ro-2]=='1' || a[ro-2]=='2' || a[ro-2]=='3' || a[ro-2]=='4' || a[ro-2]=='5' ||
                        a[ro-2]=='6' || a[ro-2]=='7' || a[ro-2]=='8' || a[ro-2]=='9'){
-                        //printf("%d", ro);
                         break;
                     }
                     else{
@@ -503,7 +512,6 @@ void datatype(char *a)
             code2[k+1]='\n';
         }
     }
-    //printf("%s",code2);
 }
 
 
@@ -525,8 +533,6 @@ void forloop(char* a)
 	x=*(a+6);
 	y=*(a+11);
 	z=*(a+12);
-	//printf("CODE IN PYTHON -\n");
-	//printf("\tfor %c in range(%c,%c%c):\n",b,x,y,z+1);
         char test[45]="for b in range(x,yz):\n";
         int countcode2=strlen(code2);
         for(int i=0;test[i]!='\0';i++){
@@ -556,8 +562,6 @@ void forloop(char* a)
 	  d=*(a+7);
 	  y=*(a+11);
 	  z=*(a+12);
-	  //printf("CODE IN PYTHON -\n");
-	  //printf("\tfor %c in range(%c%c,%c%c):\n",b,x,d,y,z);
           char test[45]="for b in range(xd,yz):\n";
         int countcode2=strlen(code2);
         for(int i=0;test[i]!='\0';i++){
@@ -594,8 +598,6 @@ void forloop(char* a)
 	 x=*(a+6);
 	 y=*(a+10);
 	 z=*(a+11);
-	// printf("CODE IN PYTHON -\n");
-	// printf("\tfor %c in range(%c,%c%c):\n",b,x,y,z);
         char test[45]="for b in range(x,yz):\n";
         int countcode2=strlen(code2);
         for(int i=0;test[i]!='\0';i++){
@@ -623,9 +625,6 @@ void forloop(char* a)
 	  b=*(a+4);
 	  x=*(a+6);
 	  y=*(a+11);
-
-	 // printf("CODE IN PYTHON -\n");
-	//  printf("\tfor %c in range(%c,%c):\n",b,x,y+1);
         char test[45]="for b in range(x,y):\n";
         int countcode2=strlen(code2);
         for(int i=0;test[i]!='\0';i++){
@@ -643,8 +642,6 @@ void forloop(char* a)
                 }
                 countcode2++;
         }
-
-
 	}
   }
    else if(s==19)
@@ -654,8 +651,6 @@ void forloop(char* a)
 	   x=*(a+6);
 	   y=*(a+12);
 	   z=*(a+13);
-	 //  printf("CODE IN PYTHON -\n");
-	 //  printf("\tfor %c in range(%c%c,%c%c):\n",b,x,c,y,z+1);
         char test[45]="for b in range(xc,yz):\n";
         int countcode2=strlen(code2);
         for(int i=0;test[i]!='\0';i++){
@@ -686,8 +681,6 @@ void forloop(char* a)
 	   b=*(a+4);
 	   x=*(a+6);
 	   y=*(a+10);
-	  // printf("CODE IN PYTHON -\n");
-	// printf("\tfor %c in range(%c,%c):\n",b,x,y);
         char test[45]="for b in range(x,y):\n";
         int countcode2=strlen(code2);
         for(int i=0;test[i]!='\0';i++){
@@ -721,18 +714,17 @@ void tab(char code2[])
   int i=0,j=0,k=0,l=0;
   for(i;code2[i]!='\0';i++)
     {
-      if(code2[i-1]=='\n'&&code2[i-2]!='{')
+      if(code2[i-1]=='\n'&&code2[i-2]!='{'&&code2[i-2]!='}')
         {
           for(l=0;l<k;l++)
             {
-              codefinal[j]='\t';
+              code3[j]='\t';
               j++;
             }
-
         }
       if(code2[i]=='{')
         {
-          codefinal[j]='\t';
+          code3[j]='\t';
           k++;
           j++;
           i++;
@@ -740,61 +732,180 @@ void tab(char code2[])
       else if(code2[i]=='}')
         {
           k--;
+          j--;
+          i++;
         }
       else
         {
-          codefinal[j]=code2[i];
+          code3[j]=code2[i];
           j++;
         }
     }
-  codefinal[j]='\0';
+  code3[j]='\0';
 }
 
 
-//for print part -- Sudhanva
-
-void print(char code[])
+//for && and ||
+void condoper(char code3[])
 {
-    int j=strlen(code2);
-    int k=0;
-    for(int i=0;code[i]!='\0';i++)
+    int j=0;
+    for(int i=0;code3[i]!='\0';i++)
     {
-        if(code[i]=='p'&&code[i+1]=='r'&&code[i+2]=='i'&&code[i+3]=='n'&&code[i+4]=='t'&&code[i+5]=='f')
-            {
-                code2[j]='p';
-                code2[j+1]='r';
-                code2[j+2]='i';
-                code2[j+3]='n';
-                code2[j+4]='t';
-                j+=5;
-                i+=5;
-            }
-        else if(code[i]=='(')
+        if((code3[i]=='&')&&(code3[i+1]=='&'))
         {
-            code2[j]=code[i];
-            j++;
-            for(int l=i+1;code[l]!=')';l++)
-                if(code[l]==','&&code[l-1]=='"')
-                    k++;
+            codefinal[j]=' ';
+            codefinal[j+1]='a';
+            codefinal[j+2]='n';
+            codefinal[j+3]='d';
+            codefinal[j+4]=' ';
+            j+=5;
+            i++;
         }
-        else if(k==1)
+        else if((code3[i]=='|')&&(code3[i+1]=='|'))
         {
-            for(i;code[i]!=',';i++);
-            k=0;
+            codefinal[j]=' ';
+            codefinal[j+1]='o';
+            codefinal[j+2]='r';
+            codefinal[j+3]=' ';
+            j+=4;
+            i++;
         }
-        else if(k==0)
-           {
-                code2[j]=code[i];
-                j++;
-           }
         else
-           {
-                code2[j]=code[i];
-                j++;
-           }
-
+        {
+            codefinal[j]=code3[i];
+            j++;
+        }
     }
-    code2[j]=';';
-    code2[strlen(code2)-1]='\n';
-
+    codefinal[j]='\0';
 }
+
+
+//checking for printf
+//checking for printf
+
+void print(char code[]){
+    int percencheck=0;
+    int count=0;
+    int array[30];
+    code2[strlen(code2)]='p';
+    code2[strlen(code2)]='r';
+    code2[strlen(code2)]='i';
+    code2[strlen(code2)]='n';
+    code2[strlen(code2)]='t';
+    for(int i =0;code[i]!='\0';i++){
+        if((code[i]=='%')&&((code[i+1]=='d')||(code[i+1]=='f')||(code[i+1]=='c'))){
+            array[count]=i;
+            count+=1;
+            percencheck=1;
+        }
+    }
+    int brc;
+    for(brc=0;((code[brc]!='(')&&(code[brc+1]!='"'));brc++);
+    //printf("%d %d\n",brc,percencheck);
+    if(percencheck==0){
+        int k,countcode2=0;
+        for(k=0;code[k]!='(';k++);
+        countcode2=strlen(code2);
+        for(k;code[k]!='\0';k++){
+                code2[countcode2]=code[k];
+                countcode2++;
+        }
+        code2[countcode2]=')';
+        code2[strlen(code2)]='\0';
+    }   
+    else{
+        for(int i=brc;i<array[0];i++){
+            code2[strlen(code2)]=code[i];
+        }
+        int k=0;
+        while(k<count){
+            int m=brc+2;
+            int endcom=0;
+            int startcom=0;
+            for(m;code[m]!='\"';m++);
+            for(startcom=m;code[startcom]!=',';startcom++);
+            int try=startcom-m+1;
+            for(endcom=m+try;code[endcom]!=',';endcom++);
+            if(k<(count-1)){
+                int f=strlen(code2);
+                int f1=m;
+                m=startcom;
+                code2[f]='\"';
+                f++;
+                while(m<=endcom){
+                    code2[f]=code[m];
+                    f++;
+                    m++;
+                }
+                code[startcom]='$';
+                code[endcom-1]='$';
+                f=strlen(code2);
+                int c1=(array[k]+1),c2=(array[k+1]-1);
+                code2[f]='\"';
+                ++f;
+                while(c1<c2){
+                    code2[f]=code[c1+1];
+                    c1++;
+                    f++;
+                }
+            }
+            else{
+                if(count==1){}
+                else{
+                    //printf("%d",count);
+                    code2[strlen(code2)]='\"';
+                    int f=strlen(code2);
+                    int f1=m;
+                    m=startcom;
+                    for(endcom=m;code[endcom]!=')';endcom++);
+                    while(m<=endcom){
+                        code2[f]=code[m];
+                        f++;
+                        m++;
+                    }
+                    code2[strlen(code2)-1]=',';
+                    f=strlen(code2);
+                    int c1=(array[k]+1);
+                    int c2;
+                    for(c2=brc+2;code[c2]!='\"';c2++);
+                    code2[f]='\"';
+                    ++f;
+                    while(c1<c2){
+                        code2[f]=code[c1+1];
+                        c1++;
+                        f++;
+                    }
+                }
+            }
+            k++;
+        }
+    }
+    //printf("%s\n",code2);
+            if((code2[strlen(code2)-2]=='\"')&&(code2[strlen(code2)-3]==',')){
+                //printf("yo");
+                code2[strlen(code2)-1]='\0';   
+                code2[strlen(code2)-2]=')'; 
+            }
+            if((code2[strlen(code2)-1]!=')')){
+                code2[strlen(code2)]=')';
+                code2[strlen(code2)]=')';
+                //printf("%s",code2);
+                //printf("HU, ");
+            }
+            //printf("\n \n%c %c %c\n\n\n",code2[strlen(code2)-3],code2[strlen(code2)-2],code2[strlen(code2)-1]);
+            
+    code2[strlen(code2)-1]='\0';
+    if((code2[strlen(code2)-3]==')')&&(code2[strlen(code2)-2]=='\"')&&(code2[strlen(code2)-1]==')')){
+        code2[strlen(code2)-1]='\0';
+        code2[strlen(code2)-2]='\0';
+        //printf("maari");
+        }
+    if(code2[strlen(code2)-1]!=')'){
+        //printf("in this too    %c\n",code2[strlen(code2)-1]);
+        code2[strlen(code2)]=')';
+        //printf("in this too    %c\n",code2[strlen(code2)-1]);
+        code2[strlen(code2)-1]='\0';
+        }
+    code2[strlen(code2)]='\n';
+    //printf("%s\n",code2);
+} 
