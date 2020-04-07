@@ -5,6 +5,7 @@ void datatype(char *a);
 void tab(char code2[]);
 void forloop(char* a);
 void print(char code[]);
+void scan(char code2[]);
 void condoper(char code3[]);
 void confirm(char code[],char check[]);
 void convert(char code[],char code2[],char check[]);
@@ -14,7 +15,7 @@ void declaration(char code[],char code2[],char check[]);
 char printc[20]="printf",elifc[10]="else if",ifc[4]="if",scanc[6]="scanf";
 char printp[20]="print",elifp[10]="elif",ifp[4]="if",inputp[6]="input";
 char intc[4]="int",doublec[6]="double",charc[4]="char";
-char code[100],code2[900],code3[900],codefinal[900];
+char code[100],code2[900],code3[900],cout[900],codefinal[900];
 int keycheck=0;//default for else if is 0 
 int ancheck=0;
 
@@ -69,22 +70,22 @@ int main(){
             datatype(code);
             ancheck+=1;
         }
-        else if((code[0]=='f')&&(code[1]=='l')){
+        else if((code[0]=='f')&&(code[1]=='l')&&(code[2]=='o')){
             //run datatype code
             datatype(code);
             ancheck+=1;
         }
-        else if((code[0]=='f')&&(code[1]=='o')){
+        else if((code[0]=='f')&&(code[1]=='o')&&(code[2]=='r')){
             //run for loop code
             forloop(code);
             ancheck+=1;
         }
-        else if(code[0]=='c'){
+        else if((code[0]=='c')&&(code[1]=='h')&&(code[2]=='a')){
             //run datatype code
             datatype(code);
             ancheck+=1;
         }
-        else if(code[0]=='d'){
+        else if((code[0]=='d')&&(code[1]=='o')&&(code[2]=='u')){
             //run datatype code
             datatype(code);
             ancheck+=1;
@@ -93,7 +94,7 @@ int main(){
             confirm(code,elifc);
             ancheck+=1;   
         }
-        else if(code[0]=='w'){
+        else if((code[0]=='w')&&(code[1]=='h')&&(code[2]=='i')){
             int lencode2=strlen(code2);
             for(int k=0;k<strlen(code);k++){
                 code2[lencode2]=code[k];
@@ -104,14 +105,14 @@ int main(){
             lencode2++;
             ancheck+=1;
         }
-        else if(code[0]=='p'){
+        else if((code[0]=='p')&&(code[1]=='r')&&(code[2]=='i')){
             print(code);
             ancheck+=1;
         }
-        else if(code[0]=='s'){
+        /*else if((code[0]=='s')&&(code[1]=='c')&&(code[2]=='a')){
             confirm(code,scanc);
             ancheck+=1;
-        }
+        }*/
         else{
             ancheck+=1;
             int lencode2=strlen(code2);
@@ -132,21 +133,13 @@ int main(){
             code2[strlen(code2)]='\n';
             ancheck+=1;
         }
-        if(ancheck==0){
-            int lencode2=strlen(code2);
-            for(int k=0;k<strlen(code);k++){
-                code2[lencode2]=code[k];
-                lencode2++;
-            }
-            code2[lencode2]='\n';
-            lencode2++;
-        }
     }
    
     //printf("%s\n",code2);
     if(code2[strlen(code2)-1]=='}')
         code2[strlen(code2)-1]='\0';
-    tab(code2);
+    scan(code2);
+    tab(cout);
     //printf("%s",code3);
     condoper(code3);
     printf("\n -------------------------------");
@@ -157,7 +150,7 @@ int main(){
         printf("*");
     }
     printf("\n");
-    printf("\n\nSubmission By:\nAmritesh\nRounak B\nSudhanva Rajesh\nVemula Vaibhav\n");
+    //printf("\n\nSubmission By:\nAmritesh\nRounak B\nSudhanva Rajesh\nVemula Vaibhav\n");
 }
 
 
@@ -214,163 +207,9 @@ void convert(char code[],char code2[],char check[]){
             }
             m++;
         }
-    }
-    if(keycheck==2){//for 1 input only
-                char inputd[20]="= int(input());";
-                char inputld[20]="= long(input());";
-                char inputf[20]="= float(input());";
-                char inputlf[20]="= double(input());";
-                char inputc[20]="= char(input());";
-                char a[10];
-                char type[10];
-                int count=0;
-                int code2count=strlen(code2);
-                for(int k=5;code[k]!=')';k++){
-                        if(code[k]=='%'){
-                                if(code[k+1]=='d'){//for int
-                                        for(int i1=k;code[i1]!='\0';i1++){
-                                                
-                                                if(code[i1]=='&'){
-                                                        count++;
-                                                        code[i1]='~';
-                                                        //printf("%s\n",code);
-                                                }
-                /*this works----->*/            else if((count%2!=0) && (code[i1]!=',')&&(code[i1]!=')')){//to check the commas
-                                                        code2[code2count]=code[i1];
-                                                        code2count++;
-                                                }
-                                                else if((count>0)&&((code[i1]==',')||(code[i1]==')'))){
-                                                        count++;
-                                                        if(count%2==0){
-                                                                for(int k1=0;inputd[k1]!='\0';k1++)
-                                                                {
-                                                                        code2[code2count]=inputd[k1];
-                                                                        code2count++;
-                                                                }
-                                                                code2[code2count]='\n';
-                                                                code2count++;
-                                                                break;
-                                                        }
-                                                }
-                                        }
-                                }
-                                else if((code[k+1]=='l')&&(code[k+2]=='d')){//for long int
-                                        for(int i1=k;code[i1]!='\0';i1++){
-                                                if(code[i1]=='&'){
-                                                        count++;
-                                                        code[i1]='~';
-                                                }
-                                                else if((count%2!=0) && (code[i1]!=',')&&(code[i1]!=')')){//to check the commas
-                                                        code2[code2count]=code[i1];
-                                                        code2count++;
-                                                }
-                                                else if((count>0)&&((code[i1]==',')||(code[i1]==')'))){
-                                                        count++;
-                                                        if(count%2==0){
-                                                                for(int k1=0;inputd[k1]!='\0';k1++){
-                                                                        code2[code2count]=inputld[k1];
-                                                                        code2count++;
-                                                                }
-                                                                code2[code2count]=';';
-                                                                code2count++;
-                                                                code2[code2count]='\n';
-                                                                code2count++;
-                                                                break;
-                                                        }
-                                                }
-                                        }
-
-                                }
-                                else if(code[k+1]=='f'){//for float
-                                        for(int i1=k;code[i1]!='\0';i1++){
-                                                if(code[i1]=='&'){
-                                                        count++;
-                                                        code[i1]='~';
-                                                }
-                                                else if((count%2!=0) && (code[i1]!=',')&&(code[i1]!=')')){//to check the commas
-                                                        code2[code2count]=code[i1];
-                                                        code2count++;
-                                                }
-                                                else if((count>0)&&((code[i1]==',')||(code[i1]==')'))){
-                                                        count++;
-                                                        if(count%2==0){
-                                                                for(int k1=0;inputd[k1]!='\0';k1++){
-                                                                        code2[code2count]=inputf[k1];
-                                                                        code2count++;
-                                                                }
-                                                                code2[code2count]=')';
-                                                                code2count++;
-                                                                code2[code2count]=';';
-                                                                code2count++;
-                                                                code2[code2count]='\n';
-                                                                code2count++;
-                                                                break;
-                                                        }
-                                                }
-                                        }
-                                }
-                                else if((code[k+1]=='l')&&(code[k+2]=='f')){//for double
-                                        for(int i1=k;code[i1]!='\0';i1++){
-                                                if(code[i1]=='&'){
-                                                        count++;
-                                                        code[i1]='~';
-                                                }
-                                                else if((count%2!=0) && (code[i1]!=',')&&(code[i1]!=')')){//to check the commas
-                                                        code2[code2count]=code[i1];
-                                                        code2count++;
-                                                }
-                                                else if((count>0)&&((code[i1]==',')||(code[i1]==')'))){
-                                                        count++;
-                                                        if(count%2==0){
-                                                                for(int k1=0;inputd[k1]!='\0';k1++){
-                                                                        code2[code2count]=inputlf[k1];
-                                                                        code2count++;
-                                                                }
-                                                                code2[code2count]=')';
-                                                                code2count++;
-                                                                code2[code2count]=')';
-                                                                code2count++;
-                                                                code2[code2count]=';';
-                                                                code2count++;
-                                                                code2[code2count]='\n';
-                                                                code2count++;
-                                                                break;
-                                                        }
-                                                }
-                                        }
-
-                                }
-                                else if(code[k+1]=='c'){//for char
-                                        for(int i1=k;code[i1]!='\0';i1++){
-                                                if(code[i1]=='&'){
-                                                        count++;
-                                                        code[i1]='~';
-                                                }
-                                                else if((count%2!=0) && (code[i1]!=',')&&(code[i1]!=')')){//to check the commas
-                                                        code2[code2count]=code[i1];
-                                                        code2count++;
-                                                }
-                                                else if((count>0)&&((code[i1]==',')||(code[i1]==')'))){
-                                                        count++;
-                                                        if(count%2==0){
-                                                                for(int k1=0;inputd[k1]!='\0';k1++){
-                                                                        code2[code2count]=inputc[k1];
-                                                                        code2count++;
-                                                                }
-                                                                code2[code2count]=';';
-                                                                code2count++;
-                                                                code2[code2count]='\n';
-                                                                code2count++;
-                                                                break;
-                                                        }
-                                                }
-                                        }
-
-                                }
-                        }
-                }  
-    }
-    else{
+        code2[strlen(code2)-1]='\0';
+    
+    
         int k=0,countcode2=0;
         char test[30];
         int c1=0;
@@ -909,3 +748,150 @@ void print(char code[]){
     code2[strlen(code2)]='\n';
     //printf("%s\n",code2);
 } 
+void scan(char code2[])
+{
+    int i=0,j=0,k=0,l=0,count=0,x=0;
+    char temp[10],data[20];
+    for(i=0;code2[i]!='\0';i++)
+    {
+        if(code2[i]=='s'&&code2[i+1]=='c'&&code2[i+2]=='a'&&code2[i+3]=='n'&&code2[i+4]=='f')
+            {
+                i+=7;
+                for(i;code2[i]!='"';i++)
+                {
+                    if(code2[i]=='%')
+                    {
+                        count++;
+                        if(code2[i+1]=='l')
+                        {
+                            if(code2[i+2]=='f')
+                                data[x]='q';
+                            else if(code2[i+2]=='d')
+                                data[x]='w';
+                        }
+                        else
+                        {
+                            data[x]=code2[i+1];
+                        }
+                        x++;
+                    }
+                }
+                i+=2;
+                x=0;
+                while(count>0)
+                {
+                  l=0;
+                  for(i;code2[i]!=','&&code2[i]!=')';i++)
+                  {
+                      if(code2[i]!='&')
+                      {
+                       temp[l]=code2[i];
+                       l++;
+                      }
+                  }
+                  i++;
+                  for(k=0;k<l;k++)
+                  {
+                      cout[j]=temp[k];
+                      j++;
+                  }
+                  cout[j++]='=';
+                  if(data[x]=='d')
+                  {
+                      cout[j++]='i';
+                      cout[j++]='n';
+                      cout[j++]='t';
+                      cout[j++]='(';
+                      cout[j++]='i';
+                      cout[j++]='n';
+                      cout[j++]='p';
+                      cout[j++]='u';
+                      cout[j++]='t';
+                      cout[j++]='(';
+                      cout[j++]=')';
+                      cout[j++]=')';
+                      cout[j++]=';';
+                      cout[j++]='\n';
+                  }
+                  else if(data[x]=='c'||data[x]=='s')
+                  {
+                      cout[j++]='i';
+                      cout[j++]='n';
+                      cout[j++]='p';
+                      cout[j++]='u';
+                      cout[j++]='t';
+                      cout[j++]='(';
+                      cout[j++]=')';
+                      cout[j++]=';';
+                      cout[j++]='\n';
+                  }
+                  else if(data[x]=='f')
+                  {
+                      cout[j++]='f';
+                      cout[j++]='l';
+                      cout[j++]='o';
+                      cout[j++]='a';
+                      cout[j++]='t';
+                      cout[j++]='(';
+                      cout[j++]='i';
+                      cout[j++]='n';
+                      cout[j++]='p';
+                      cout[j++]='u';
+                      cout[j++]='t';
+                      cout[j++]='(';
+                      cout[j++]=')';
+                      cout[j++]=')';
+                      cout[j++]=';';
+                      cout[j++]='\n';
+                  }
+                  else if(data[x]=='q')
+                  {
+                      cout[j++]='d';
+                      cout[j++]='o';
+                      cout[j++]='u';
+                      cout[j++]='b';
+                      cout[j++]='l';
+                      cout[j++]='e';
+                      cout[j++]='(';
+                      cout[j++]='i';
+                      cout[j++]='n';
+                      cout[j++]='p';
+                      cout[j++]='u';
+                      cout[j++]='t';
+                      cout[j++]='(';
+                      cout[j++]=')';
+                      cout[j++]=')';
+                      cout[j++]=';';
+                      cout[j++]='\n';
+                  }
+                  else if(data[x]=='w')
+                  {
+                      cout[j++]='l';
+                      cout[j++]='o';
+                      cout[j++]='n';
+                      cout[j++]='g';
+                      cout[j++]='(';
+                      cout[j++]='i';
+                      cout[j++]='n';
+                      cout[j++]='p';
+                      cout[j++]='u';
+                      cout[j++]='t';
+                      cout[j++]='(';
+                      cout[j++]=')';
+                      cout[j++]=')';
+                      cout[j++]=';';
+                      cout[j++]='\n';
+                  }
+                  count--;
+                  x++;
+                }
+                i++;
+            }
+        else
+        {
+            cout[j]=code2[i];
+            j++;
+        }
+    }
+    cout[j]='\0';
+}
