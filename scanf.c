@@ -6,6 +6,7 @@ void scan(char code2[])
     {
         if(code2[i]=='s'&&code2[i+1]=='c'&&code2[i+2]=='a'&&code2[i+3]=='n'&&code2[i+4]=='f')
             {
+                x=0;
                 i+=7;
                 for(i;code2[i]!='"';i++)
                 {
